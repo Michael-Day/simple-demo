@@ -23,35 +23,35 @@ sources:
         url:  //vector.mapzen.com/osm/all/{z}/{x}/{y}.topojson?api_key=vector-tiles-HqUVidw
 
 layers:
-    earth:
-        data: { source: osm }
-        draw:
-            polygons:
-                order: 0
-                color: '#ddeeee'
+#    earth:
+#        data: { source: osm }
+#        draw:
+#            polygons:
+#                order: 0
+#                color: [0,0,0,1]
 
     landuse:
         data: { source: osm }
         draw:
             polygons:
                 order: 1
-                color: '#aaffaa'
+                color: [100,100,100,1]
 
-    water:
-        data: { source: osm }
-        draw:
-            polygons:
-                order: 2
-                color: lightgrey
+#    water:
+#        data: { source: osm }
+#        draw:
+#            polygons:
+#                order: 2
+#                color: [255,255,255,1]
 
     roads:
         data: { source: osm }
         filter:
-            not: { kind: ["path", "rail"] }
+          #  not: { kind: ["path", "rail"] }
         draw:
             lines:
                 order: 4
-                color: gray
+                color: [0,0,100,10]
                 width: 8
                 cap: round
         highway:
@@ -63,7 +63,7 @@ layers:
                     color: lightgrey
                     width: 12
                     outline:
-                        color: grey
+                        color: [100,100,100,10]
                         width: 1.5
         minor_road:
             filter:

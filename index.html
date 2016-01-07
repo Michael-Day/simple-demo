@@ -12,6 +12,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Simple demo – Tangram</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.0.0-beta.2/leaflet.css" />
+    <script language="javascript" type="text/javascript" src="p5.js"></script>
+    <!-- uncomment lines below to include extra p5 libraries -->
+    <script language="javascript" src="p5.dom.js"></script>
+    <!-- my p5js layer thing -->
 
     <style>
         body {
@@ -31,7 +35,7 @@
   </head>
 
   <body>
-    <div id="map"></div>
+    <div id="map"; z-index: -100;></div>
 
     <!-- leaflet -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.0.0-beta.2/leaflet.js"></script>
@@ -43,25 +47,25 @@
     <!-- Demo setup -->
     <script>
 
-        var map = L.map('map');
+        var mapp = L.map('map');
 
        var layer = Tangram.leafletLayer({
             scene: 'scene.yaml',
           /*  attribution: '<a href="https://mapzen.com/tangram" target="_blank">Tangram</a> | &copy; OSM contributors | <a href="https://mapzen.com/" target="_blank">Mapzen</a>'*/
         });
 
-        layer.addTo(map);
+        layer.addTo(mapp);
 
-        map.setView([40.70531887544228, -74.00976419448853], 15);
+        mapp.setView([40.70531887544228, -74.00976419448853], 15);
 
         panMe = function(){
-          map.panBy([-300,0]);
+          mapp.panBy([-300,0]);
         }
         setInterval(panMe, 1500);
 
     </script>
-    <script>
+    <!-- put p5js stuff at the end, draw on top -->
+    <script language="javascript" type="text/javascript" src="map-overlay.js"></script>
 
-    </script>
   </body>
 </html>
