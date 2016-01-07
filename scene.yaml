@@ -6,8 +6,16 @@ lights:
     light1:
         type: directional
         direction: [0, 1, -.5]
-        diffuse: .3
-        ambient: 1
+        diffuse: .1
+        ambient: .3
+    light2:
+      visible: true
+      type: point
+      position: [-74.0170, 40.7031, 100]
+      origin: world
+      ambient: .3
+      diffuse: 1
+      specular: .2
 
 sources:
     osm:
@@ -34,7 +42,7 @@ layers:
         draw:
             polygons:
                 order: 2
-                color: '#88bbee'
+                color: lightgrey
 
     roads:
         data: { source: osm }
@@ -52,7 +60,7 @@ layers:
             draw:
                 lines:
                     order: 5
-                    color: '#cc6666'
+                    color: lightgrey
                     width: 12
                     outline:
                         color: grey
@@ -78,8 +86,3 @@ layers:
                         h = Math.max(h, .4); // min brightness: .4
                         return [h, h, h];
                     }
-        3d-buildings:
-            filter: { $zoom: { min: 15 } }
-            draw:
-                polygons:
-                    extrude: function () { return feature.height > 20 || $zoom >= 16; }
