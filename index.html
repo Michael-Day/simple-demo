@@ -23,19 +23,18 @@
             border: 0px;
             padding: 0px;
         }
-        /* make page background a p5js */
-
         #map {
             height: 100%;
             width: 100%;
             position: absolute;
+            z-index: 0;
         }
 
     </style>
   </head>
 
   <body>
-    <div id="map"; z-index: -100;></div>
+    <div id="map"; ></div>
 
     <!-- leaflet -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.0.0-beta.2/leaflet.js"></script>
@@ -43,13 +42,12 @@
     <!-- Main tangram library -->
     <script src="https://mapzen.com/tangram/0.4/tangram.min.js"></script>
 
-
     <!-- Demo setup -->
     <script>
 
         var mapp = L.map('map');
 
-       var layer = Tangram.leafletLayer({
+        var layer = Tangram.leafletLayer({
             scene: 'scene.yaml',
           /*  attribution: '<a href="https://mapzen.com/tangram" target="_blank">Tangram</a> | &copy; OSM contributors | <a href="https://mapzen.com/" target="_blank">Mapzen</a>'*/
         });
@@ -59,12 +57,21 @@
         mapp.setView([40.70531887544228, -74.00976419448853], 15);
 
         panMe = function(){
-          mapp.panBy([-300,0]);
+          mapp.panBy([-5,0]);
+
         }
-        setInterval(panMe, 1500);
+        setInterval(panMe, 40);
+        // won't pan and zoom at the same time?
+      /* zoomMe = function() {
+          if(mapp.getZoom() > 12 && mapp.getZoom() <16){
+            mapp.zoomIn(0.002);
+          }
+        }*/
+      //  setInterval(zoomMe, 33);
 
     </script>
     <!-- put p5js stuff at the end, draw on top -->
+    <!-- PROBLEM: we lose the interaction over the p5js sketch -->
     <script language="javascript" type="text/javascript" src="map-overlay.js"></script>
 
   </body>
