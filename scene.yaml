@@ -1,10 +1,15 @@
+# to do
+# colours
+# check the osm layers that are available
+# topo, contours?
+
 cameras:
     camera1:
-        type: perspective
+        type: isometric
 
 lights:
     light1:
-        type: directional
+        type: point
         direction: [0, 1, -.5]
         diffuse: .1
         ambient: .3
@@ -20,7 +25,7 @@ lights:
 sources:
     osm:
         type: TopoJSON
-        url:  //vector.mapzen.com/osm/all/{z}/{x}/{y}.topojson?api_key=vector-tiles-HqUVidw
+        url:  //vector.mapzen.com/osm/all/{z}/{x}/{y}.topojson?api_key=vector-tiles-E7BgIC4
 
 layers:
 #    earth:
@@ -35,7 +40,8 @@ layers:
         draw:
             polygons:
                 order: 1
-                color: [100,100,100,1]
+                #color: [0, 62, 128] ?
+                color: '#003e80'
 
 #    water:
 #        data: { source: osm }
@@ -47,11 +53,11 @@ layers:
     roads:
         data: { source: osm }
         filter:
-          #  not: { kind: ["path", "rail"] }
+          # not: { kind: ["path", "rail"] }
         draw:
             lines:
                 order: 4
-                color: [0,0,100,10]
+                color: '#99ccff'
                 width: 8
                 cap: round
         highway:
@@ -60,10 +66,10 @@ layers:
             draw:
                 lines:
                     order: 5
-                    color: lightgrey
+                    color: '#99ccff'
                     width: 12
                     outline:
-                        color: [100,100,100,10]
+                        color: [100,100,100]
                         width: 1.5
         minor_road:
             filter:
@@ -71,18 +77,23 @@ layers:
             draw:
                 lines:
                     order: 3
-                    color: lightgrey
+                    color: '#cce5ff'
                     width: 5
 
     buildings:
         data: { source: osm }
         draw:
             polygons:
-                order: 6
-                color: |
-                    function () {
-                        var h = feature.height || 20;
-                        h = Math.min((h + 50)/ 255, .8); // max brightness: .8
-                        h = Math.max(h, .4); // min brightness: .4
-                        return [h, h, h];
-                    }
+                order: 9
+                color: '#blue' #|
+                    #    function () {
+                    #        var h = feature.height || 20;
+                    #        h = Math.min((h + 50)/ 255, .3); // max brightness: .5
+                    #        h = Math.max(h, .1); // min brightness: .4
+                    #        return [h, h, h];
+                    #    }
+        3d-buildings:
+                    filter: { $zoom: { min: 13 } }
+                    draw:
+                        polygons:
+                            extrude: function () { return feature.height > 10 || $zoom >= 10; }

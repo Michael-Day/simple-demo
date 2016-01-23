@@ -15,6 +15,8 @@
     <script language="javascript" type="text/javascript" src="p5.js"></script>
     <!-- uncomment lines below to include extra p5 libraries -->
     <script language="javascript" src="p5.dom.js"></script>
+
+    <link href='https://fonts.googleapis.com/css?family=Arvo:700' rel='stylesheet' type='text/css'>
     <!-- my p5js layer thing -->
 
     <style>
@@ -23,11 +25,30 @@
             border: 0px;
             padding: 0px;
         }
+        #text {
+            height: auto;
+            width: 45%;
+            left: 5%;
+            top: 10%;
+            position:absolute;
+            z-index: 4;
+            /*background-color: #999999;
+            color: #3b3b3b;
+            */
+            background-color: white;
+            color: #808080;
+            font-size: 3em;
+            font-family: "Arvo", sans-serif;
+
+            padding: 20px;
+            /*text-shadow: -0.05em 0.05em #bdbdbd;*/
+        }
         #map {
             height: 100%;
             width: 100%;
             position: absolute;
             z-index: 0;
+            background-color: grey;
         }
 
     </style>
@@ -42,36 +63,9 @@
     <!-- Main tangram library -->
     <script src="https://mapzen.com/tangram/0.4/tangram.min.js"></script>
 
-    <!-- Demo setup -->
-    <script>
 
-        var mapp = L.map('map');
-
-        var layer = Tangram.leafletLayer({
-            scene: 'scene.yaml',
-          /*  attribution: '<a href="https://mapzen.com/tangram" target="_blank">Tangram</a> | &copy; OSM contributors | <a href="https://mapzen.com/" target="_blank">Mapzen</a>'*/
-        });
-
-        layer.addTo(mapp);
-
-        mapp.setView([40.70531887544228, -74.00976419448853], 15);
-
-        panMe = function(){
-          mapp.panBy([-5,0]);
-
-        }
-        setInterval(panMe, 40);
-        // won't pan and zoom at the same time?
-      /* zoomMe = function() {
-          if(mapp.getZoom() > 12 && mapp.getZoom() <16){
-            mapp.zoomIn(0.002);
-          }
-        }*/
-      //  setInterval(zoomMe, 33);
-
-    </script>
     <!-- put p5js stuff at the end, draw on top -->
-    <!-- PROBLEM: we lose the interaction over the p5js sketch -->
+    <!-- All the mapzen stuff is in the js file-->
     <script language="javascript" type="text/javascript" src="map-overlay.js"></script>
 
   </body>
