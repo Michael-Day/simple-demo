@@ -9,15 +9,16 @@
   <head>
     <meta charset="utf-8">
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Simple demo – Tangram</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <title>~</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.0.0-beta.2/leaflet.css" />
+    <!-- p5js -->
     <script language="javascript" type="text/javascript" src="p5.js"></script>
-    <!-- uncomment lines below to include extra p5 libraries -->
     <script language="javascript" src="p5.dom.js"></script>
-
+    <!-- fonts -->
     <link href='https://fonts.googleapis.com/css?family=Arvo:700' rel='stylesheet' type='text/css'>
-    <!-- my p5js layer thing -->
+
 
     <style>
         body {
@@ -50,6 +51,18 @@
             z-index: 0;
             background-color: grey;
         }
+        .hidden {
+
+            visibility: hidden;
+            opacity: 0;
+             -webkit-transition: visibility 0s 1s, opacity 1s linear;
+            transition: visibility 0s 1s, opacity 1s linear;
+        }
+        .visible {
+            visibility: visible;
+            opacity: 1;
+
+        }
 
     </style>
   </head>
@@ -61,11 +74,11 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.0.0-beta.2/leaflet.js"></script>
 
     <!-- Main tangram library -->
-    <script src="https://mapzen.com/tangram/0.4/tangram.min.js"></script>
-
-
+    <!--script src="https://mapzen.com/tangram/0.5/tangram.min.js"></script-->
+    <script src="tangram.debug.js"></script>
     <!-- put p5js stuff at the end, draw on top -->
-    <!-- All the mapzen stuff is in the js file-->
+    <!-- All the mapzen and leaflet stuff is in the js file-->
+    <script language="javascript" type="text/javascript" src="text-array.js"></script>
     <script language="javascript" type="text/javascript" src="map-overlay.js"></script>
 
   </body>

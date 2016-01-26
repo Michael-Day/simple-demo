@@ -93,7 +93,7 @@ layers:
                     #        return [h, h, h];
                     #    }
         3d-buildings:
-                    filter: { $zoom: { min: 13 } }
+                    #filter: { $zoom: { min: 13 } }
                     draw:
                         polygons:
                             extrude: function () { return feature.height > 10 || $zoom >= 10; }
