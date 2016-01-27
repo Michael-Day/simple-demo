@@ -3,8 +3,6 @@ Map scroll thing
 23rd January 2016
 
 TO DO
-
-fade out, fade back in again
 sound
 upload to server
 working on android/ios
@@ -12,14 +10,21 @@ working on android/ios
 
 var symptom; // div for the texts
 var fadeOut; // var for the fadeout function if text is unclicked
+var locsList = ["ny", "oldst", "apple","tcl","vivo","huawei", "lenovo", "samsung"];
+var locsIndex = 0;
 
 // var object containing the lat and long for the locations to zoom from
 var locs =
-    {
-        ny:[40.70531887544228, -74.00976419448853],
-        oldst: [51.52569,-0.08736],
-        apple: [37.332342, -122.030797]
-    }
+    [
+        [40.70531887544228, -74.00976419448853],
+        [51.52569,-0.08736],
+        [37.332342, -122.030797],
+        [48.840978, 2.230661],
+        [26.03333, 113.716667],
+        [37.513144, 127.059809],
+        [40.042934, 116.309330],
+        [37.259624, 127.048512]
+    ]
 
 function setup() {
     var canvass = createCanvas(1,1);    // canvas, for no reason
@@ -50,7 +55,7 @@ var layer = Tangram.leafletLayer({
 layer.addTo(mapp);
 
 
-mapp.setView(locs.apple, 19); // This sets up the map position, to old st
+mapp.setView(locs[locsIndex], 19); // This sets up the map position, to old st
 
 setInterval(refreshLocation, 360000);
 
@@ -64,9 +69,12 @@ setInterval(zoomMe, 100);
 function windowResized() {
   // sets the type box size depending on the window size
   if(symptom){
-      if(windowWidth > 1000){
-          symptom.style("font-size","2.8em");
+      if(windowWidth > 1800){
+          symptom.style("font-size","3.5em");
           symptom.style("width", "40%");
+      } else if (windowWidth > 1000) {
+          symptom.style("font-size","2.8em");
+          symptom.style("width", "45%");
       } else if (windowWidth > 800) {
           symptom.style("font-size","2.2em");
           symptom.style("width", "50%");
@@ -105,11 +113,16 @@ function makeInvisible() {
     clearTimeout(fadeOut);      // clear the timer for UNclicked fadeout
     var thing =  document.getElementById("text"); // get the element
     thing.className = "hidden";         // change the class of it
-    console.log("clicked");             // debug
+    //console.log("clicked");             // debug
 }
 
 function refreshLocation() {
     // work up through the list of locations
-    mapp.setView(locs.ny, 19); // This sets up the map position, to old st
+    if (locsIndex <= locs.length){
+        locsIndex++;
+        mapp.setView(locs[locsIndex], 19); // This sets up the map position, to old st
+    } else {
+        locsIndex = 0;
+    }
 
 }
