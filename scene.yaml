@@ -8,19 +8,20 @@ cameras:
         type: isometric
 
 lights:
-    light1:
-        type: point
-        direction: [0, 1, -.5]
-        diffuse: .1
-        ambient: .3
+    #light1:
+    #    type: point
+    #    origin: ground
+    #    position: [0, 0, 800px]
+    #    diffuse: .4
+        #specular: .3
     light2:
-      visible: true
-      type: point
-      position: [-74.0170, 40.7031, 100]
-      origin: world
-      ambient: .3
-      diffuse: 1
-      specular: .2
+        visible: true
+        type: directional
+      #position: [-74.0170, 40.7031, 100]
+      #origin: world
+        ambient: .4
+        diffuse: .6
+        specular: .9
 
 sources:
     osm:
@@ -41,7 +42,7 @@ layers:
             polygons:
                 order: 1
                 #color: [0, 62, 128] ?
-                color: '#003e80'
+                color: '#556483'
 
 #    water:
 #        data: { source: osm }
@@ -58,8 +59,8 @@ layers:
             lines:
                 order: 4
                 color: '#99ccff'
-                width: 8
-                cap: round
+                width: 6
+                cap: butt
         highway:
             filter:
                 kind: highway
@@ -67,10 +68,8 @@ layers:
                 lines:
                     order: 5
                     color: '#99ccff'
-                    width: 12
-                    outline:
-                        color: [100,100,100]
-                        width: 1.5
+                    width: 4
+
         minor_road:
             filter:
                 kind: minor_road
@@ -78,14 +77,14 @@ layers:
                 lines:
                     order: 3
                     color: '#cce5ff'
-                    width: 5
+                    width: 3
 
     buildings:
         data: { source: osm }
         draw:
             polygons:
                 order: 9
-                color: '#blue' #|
+                color: '#grey' #|
                     #    function () {
                     #        var h = feature.height || 20;
                     #        h = Math.min((h + 50)/ 255, .3); // max brightness: .5
@@ -96,4 +95,4 @@ layers:
                     #filter: { $zoom: { min: 13 } }
                     draw:
                         polygons:
-                            extrude: function () { return feature.height > 10 || $zoom >= 10; }
+                            extrude: function () { return feature.height > 2 || $zoom >= 10; }

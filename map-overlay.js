@@ -1,29 +1,31 @@
 /*
 Map scroll thing
-23rd January 2016
+28th January 2016
 
 TO DO
-sound
+sound?
 upload to server
-working on android/ios
+
 */
 
 var symptom; // div for the texts
 var fadeOut; // var for the fadeout function if text is unclicked
-var locsList = ["ny", "oldst", "apple","tcl","vivo","huawei", "lenovo", "samsung"];
 var locsIndex = 0;
 
 // var object containing the lat and long for the locations to zoom from
+//[40.70531887544228, -74.00976419448853],
 var locs =
     [
-        [40.70531887544228, -74.00976419448853],
-        [51.52569,-0.08736],
-        [37.332342, -122.030797],
-        [48.840978, 2.230661],
-        [26.03333, 113.716667],
-        [37.513144, 127.059809],
-        [40.042934, 116.309330],
-        [37.259624, 127.048512]
+        //[22.54531, 114.08034],    // huawei head office, shenzen
+        [51.52569, -0.08736],       // oldst
+        [37.332342, -122.030797],   // apple
+        //[22.54222, 113.9482],    // tcl, guanddong
+        //[37.513144, 127.059809],    // vivo?
+        [22.287844, 114.212298],    // lenovo reg hq
+        //[37.496609, 127.026902],    // samsung
+        [37.422230, -122.084047],    // googleplex
+        [37.484914, -122.148393],   // facebook
+        [37.777045, -122.416448]    // twitter
     ]
 
 function setup() {
@@ -57,7 +59,7 @@ layer.addTo(mapp);
 
 mapp.setView(locs[locsIndex], 19); // This sets up the map position, to old st
 
-setInterval(refreshLocation, 360000);
+setInterval(refreshLocation, 180000);
 
 // function to do the zooming out
 zoomMe = function(){
@@ -118,11 +120,12 @@ function makeInvisible() {
 
 function refreshLocation() {
     // work up through the list of locations
-    if (locsIndex <= locs.length){
+    if (locsIndex < locs.length-1){
         locsIndex++;
-        mapp.setView(locs[locsIndex], 19); // This sets up the map position, to old st
+        console.log("locsIndex inc = " + locsIndex);
     } else {
         locsIndex = 0;
+        console.log("locsIndex reset = " + locsIndex);
     }
-
+    mapp.setView(locs[locsIndex], 19); // This sets up the map position, to old st
 }
