@@ -1,6 +1,8 @@
 /*
     "Screen Time"
-    16th February 2016
+    23rd February 2016
+    ------------------
+    1-minute branch
     ------------------
     Michael Day
     @mday
@@ -60,11 +62,11 @@ layer.addTo(mapp);
 
 mapp.setView(locs[locsIndex], 19); // This sets up the map position, to old st
 
-setInterval(refreshLocation, 180000);
+setInterval(refreshLocation, 20000); // 180 secs for normal version, 20 secs for 1-minute version
 
 // function to do the zooming out
 zoomMe = function(){
-    mapp.zoomOut(0.001);
+    mapp.zoomOut(0.002); // 0.001 for normal version, 0.008 for 1-minute version
 }
 
 setInterval(zoomMe, 100);
@@ -93,6 +95,8 @@ function windowResized() {
 
 
 function randomText() {
+    // play SOUND HERE
+
     s = textArray[textIndex];
     symptom.html(s);
     textIndex++;
@@ -102,7 +106,7 @@ function randomText() {
     thing.className = "visible";                 // change the class of it
 
     // start counter for text fadeout if unclicked
-    fadeOut = setInterval(makeInvisible, 10400);
+    fadeOut = setInterval(makeInvisible, 4000); // 10400 for normal, 5000 for 1-min
 
     // shuffles the text array when it reaches the end
     if(textIndex == textArray.length){
@@ -111,7 +115,7 @@ function randomText() {
     }
 }
 
-setInterval(randomText, 12000); // refresh interval for texts
+setInterval(randomText, 6000); // refresh interval for texts. 12 secs for normal version, 6 secs for 1-min
 
 
 function makeInvisible() {
@@ -122,6 +126,8 @@ function makeInvisible() {
 }
 
 function refreshLocation() {
+    // change SOUND HERE
+
     // work up through the list of locations
     if (locsIndex < locs.length-1){
         locsIndex++;
